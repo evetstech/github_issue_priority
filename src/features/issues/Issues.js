@@ -5,7 +5,7 @@ import { insertUpdateRepoIssues } from './IssuesActions';
 import { getSelectedRepo } from './IssuesSelectors';
 import useFetch from '../../common/hooks/useFetch';
 import { getIssuesEndpoint } from '../../common/services/octokitRequest';
-import { convertDate } from '../../common/services/convertDate';
+import { convertDate, timeSince } from '../../common/services/convertDate';
 import Repositories from '../repositories/Repositories';
 import Table from '../../common/components/table/Table';
 import './Issues.scss';
@@ -15,7 +15,7 @@ const columns = [
     Header: '',
     accessor: 'avatar',
     // requirements of avatar being 40x40
-    Cell: ({ cell: { value } }) => <img src={value} alt={value} width='40px' height='40px' />
+    Cell: ({ cell: { value } }) => <img src={value.address} title={value.user} alt={value} width='40px' height='40px' />
   },
   {
     Header: 'Title',
@@ -23,8 +23,7 @@ const columns = [
   },
   {
     Header: 'Date Created',
-    accessor: 'date',
-    Cell: ({ cell: { value } }) => <div style={{ left: '50%' }}>{value}</div>
+    accessor: 'date'
   },
   {
     Header: 'Last Updated',
@@ -32,20 +31,22 @@ const columns = [
   }
 ];
 
-// default avatar icon is github icon
+// if not assigned or no avatar, default avatar icon is github icon
 const createTableData = (data = []) => {
   return data.map(row => {
     return {
       idx: row.getIn(['title']),
-      avatar: row.getIn(['assignee']) ? row.getIn(['assignee', 'avatar_url']) : 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+      avatar: {
+        address: row.getIn(['assignee']) ? row.getIn(['assignee', 'avatar_url']) : 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+        user: row.getIn(['assignee']) ? row.getIn(['assignee', 'login']) : 'Unassigned'
+      },
       title: row.getIn(['title']),
       date: convertDate(row.getIn(['created_at'])),
-      updated: convertDate(row.getIn(['updated_at']))
+      updated: timeSince(row.getIn(['updated_at']))
     };
   });
 };
 
-//add cache cache busting
 const Issues = (props) => {
   const selectedRepo = useSelector(getSelectedRepo);
   const authKey = useSelector(state => state.persistedReducer.apiKey.getIn(['key']));
