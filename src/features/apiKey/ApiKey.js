@@ -22,7 +22,7 @@ const ApiKey = () => {
     setApiKeyInput(e.target.value);
   }, [setApiKeyInput]);
 
-  const onButtonClick = useCallback(() => {
+  const handleRequest = useCallback(() => {
     setIsFetchRequest(true);
 
     const fetchData = async () => {
@@ -48,8 +48,8 @@ const ApiKey = () => {
 
   return (
     <div className='center-wrap'>
-      <WithLabelInput value={apiKeyInput} onChange={onInputChange} label='GitHub Personal Access Token' />
-      <Button disabled={isFetchRequest} onClick={onButtonClick} text='OK' />
+      <WithLabelInput value={apiKeyInput} onChange={onInputChange} handleEnter={handleRequest} label='GitHub Personal Access Token' />
+      <Button disabled={isFetchRequest} onClick={handleRequest} text='OK' />
     </div>
   );
 };

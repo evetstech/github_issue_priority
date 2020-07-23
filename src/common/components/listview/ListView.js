@@ -26,6 +26,4 @@ const ListView = (props) => {
     </div>
   );
 };
-{/* <RepoItem item={item} onClick={onClick} key={index}/> :
-<div>asdlfasdf</div> */}
 export default ListView;
