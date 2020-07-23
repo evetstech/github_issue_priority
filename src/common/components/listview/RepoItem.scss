@@ -1,0 +1,27 @@
+.list-repo-item {
+  margin: auto;
+  table-layout: fixed;
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  transition: background-color 0.5s ease;
+  div {
+    height: 5rem;
+    button {
+      background: none!important;
+      border: none;
+      font-size: 1rem;
+      padding: 0!important;
+      /*optional*/
+      font-family: arial, sans-serif;
+      /*input has OS specific font-family*/
+      color: #069;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    div {
+      border-bottom: 1px black solid;
+      padding-bottom: 1em;
+    }
+  }
+}
