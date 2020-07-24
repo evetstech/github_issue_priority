@@ -1,68 +1,18 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## Installation
 
-## Available Scripts
+Clone the repo, then npm install
 
-In the project directory, you can run:
+## Usage
 
-### `npm start`
+Before you begin, you need to generate a GitHub Private Access Key (https://github.com/settings/apps then Personal access tokens). For scopes, enable full repo access (I haven't tested making permissions less strict).
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+npm start in the root directory of the project.  On load, the first screen will ask for the key you just generated.  The second screen is the list of repositories that your key has access to.  Clicking on one repository will open up the issues page.  To reorder issues, you can use drag and drop.  Saving persists through reload via localSession using redux-persist.  Media query breakpoint is changing the two column layout in issues to a one column after a certain small width is hit.  Left column repos list can be used as a navigator to other repo issues.  I added a 'test-coverage' argument to the scripts to get code coverage information via: npm run test-covarage.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Caveats
+While the repo and issues states persist in cache, once the initial data has been loaded into the store, the app will not refresh the data; part to save calls/loading/processing, part because I did not implement a cache invalidation service.  From reading the API docs, implementation can be done with eTags headers.
 
-### `npm test`
+Make note that the access key is stored in the store, which is a really bad thing, but without a proper backend to interface with, there's no real good way to save it on the front end.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If an issue has no assignee, the default icon will be the github logo.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Code coverage is around 63% branch, as I ran out of time, and the more I messed with styling and refactoring things, more time got eaten up, so it was time to stop, as there will always be things to find that you can refactor to improve.
