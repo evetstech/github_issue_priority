@@ -12,12 +12,13 @@ import './ApiKey.scss';
 const WithLabelInput = withLabel(Input);
 
 const ApiKey = () => {
-  const [apiKeyInput, setApiKeyInput] = useState('489cdcdc66eef17209e7ed3856d39f9a3821bba1');
+  const [apiKeyInput, setApiKeyInput] = useState('');
   const [isFetchRequest, setIsFetchRequest] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
   const dispatch = useDispatch();
   let history = useHistory();
-  
+
   const onInputChange = useCallback((e) => {
     setApiKeyInput(e.target.value);
   }, [setApiKeyInput]);
@@ -32,6 +33,11 @@ const ApiKey = () => {
         setIsAuthenticated(true);
         dispatch(addApiKey(apiKeyInput));
         dispatch(addRepoList(response.data));
+        return;
+      }
+
+      if (response.error) {
+        setErrorMessage(response.error);
       }
 
       setIsFetchRequest(false);
@@ -41,16 +47,20 @@ const ApiKey = () => {
   }, [apiKeyInput, dispatch]);
 
   useEffect(() => {
-    if(isAuthenticated) {
+    if (isAuthenticated) {
       history.push('/repos');
     }
   }, [isAuthenticated, history]);
 
   return (
-    <div className='center-wrap'>
-      <WithLabelInput value={apiKeyInput} onChange={onInputChange} handleEnter={handleRequest} label='GitHub Personal Access Token' />
-      <Button disabled={isFetchRequest} onClick={handleRequest} text='OK' />
+    <div>
+      <div className='center-wrap'>
+        <WithLabelInput value={apiKeyInput} onChange={onInputChange} handleEnter={handleRequest} label='GitHub Personal Access Token' />
+        <Button disabled={isFetchRequest} onClick={handleRequest} text='OK' />
+        {errorMessage && <div className='apiError'>{errorMessage}</div>}
+      </div>
     </div>
+
   );
 };
 
