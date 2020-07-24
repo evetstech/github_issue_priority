@@ -9,7 +9,7 @@ const ListView = (props) => {
       <h2>{header}</h2>
       <ul className={type === 'column' ? 'ul-wrap-col' : 'ul-wrap' } data-role="listview" data-view="content" data-select-node="true">
         {items && items.map((item, index) => (
-          <li style={{ display: 'inline', listStyleType: 'none' }} key={index}>
+          <li key={index}>
             <div className={selected === item.full_name ? 'list-item-selected' : type === 'column' ? 'list-item-col' : 'list-item'}>
               <button onClick={() => onClick(item)}>
                 {item.full_name}
