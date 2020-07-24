@@ -47,7 +47,7 @@ const createTableData = (data = []) => {
   });
 };
 
-const Issues = (props) => {
+const Issues = () => {
   const selectedRepo = useSelector(getSelectedRepo);
   const authKey = useSelector(state => state.persistedReducer.apiKey.getIn(['key']));
   const issues = useSelector(state => state.persistedReducer.issues.getIn([selectedRepo]));

@@ -1,5 +1,12 @@
 @import '../../../main';
 
+@media (max-width: 768px) {
+  .listview-wrap-col {
+    margin-left: 15%;
+    position: relative;
+  }
+}
+
 .listview-wrap {
   display:flex;
   flex-direction:column;
