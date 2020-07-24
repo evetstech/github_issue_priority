@@ -35,7 +35,7 @@ const Repositories = (props) => {
   }
 
   return (
-    <div className={'repo-wrap'}>
+    <div className={'repo-wrap-' + type}>
       <ListView type={type} header={'Repositories'} selected={selected} onClick={onItemClick} items={listRepos} />
     </div >
   );

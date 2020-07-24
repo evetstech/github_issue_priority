@@ -38,13 +38,12 @@
   width: 100%;
   button {
     width: 100%;
-    overflow: hidden;
-    margin: 5px 0 0 0;
-    padding: 0 0 0 0;
+    margin-top: 5px;
     text-align: left;
     display:block;
     background: white;
     border: none;
+    white-space: nowrap;
     font-size: 1rem;
     padding: 0!important;
     font-size: 1.2rem;
@@ -60,8 +59,8 @@
       font-size: 1rem;
       text-decoration: none;
       span {
-        margin-top: 2px;
-        font-size: 0.875rem;
+        padding: 0.5rem 0 0 0rem;
+        font-size: 0.785rem;
       }
     }
   }

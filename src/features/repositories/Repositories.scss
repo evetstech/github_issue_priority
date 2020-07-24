@@ -1,10 +1,15 @@
-.repo-wrap {
+.repo-wrap-full, .repo-wrap-column {
   display: flex;
   text-align: center;
   min-height: 100vh;
   height: 100%;
 }
 
+.repo-wrap-full {
+  h2 {
+    margin: 0;
+  }
+}
 .repo-header {
   display: inline-block;
 }

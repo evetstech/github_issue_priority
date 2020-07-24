@@ -71,9 +71,8 @@ const Issues = (props) => {
     const newData = [...issues.toJS()];
     const [movedRow] = newData.splice(startIndex, 1);
     newData.splice(endIndex, 0, movedRow);
-    console.log(newData);
-    dispatch(insertUpdateRepoIssues(selectedRepo, newData));
 
+    dispatch(insertUpdateRepoIssues(selectedRepo, newData));
   };
 
   if (!selectedRepo || !authKey) {
@@ -81,13 +80,15 @@ const Issues = (props) => {
   }
 
   return (
-    <div className='issues-wrap'>
-      <div className='repo'>
+    <div className='issues-top-wrap'>
+      <div className='issues-repo-wrap'>
         <Repositories type='column' selected={selectedRepo} />
       </div>
-      <div style={{ width: '50%', marginLeft: '10%' }}>
+      <div className='issues-col'>
         <h2>Issues</h2>
-        <Table data={issuesData} columns={columns} reorderData={reorderData} />
+        <div className='table-wrap'>
+          <Table data={issuesData} columns={columns} reorderData={reorderData} />
+        </div>
       </div>
     </div>
   );
